@@ -19,6 +19,10 @@ public class Sangue implements IDAO<Object>{
     private String fatorRh;
     private int Id;
 
+    public Sangue() {
+        this.dao = new SangueDAO(this);
+    }
+    
     public SangueDAO getDao() {
         return dao;
     }
@@ -44,17 +48,17 @@ public class Sangue implements IDAO<Object>{
     }
 
     public int getId() {
-        return Id;
+        int sangue_id = ((Sangue) this.dao.find(tipoSanguineo, fatorRh)).Id;
+        if (sangue_id <= 0) {
+            System.out.println("Tipo sanguineo ou fator rh inválido.");
+            return -1;
+        }
+        return sangue_id;
     }
 
     public void setId(int Id) {
         this.Id = Id;
-    }
-
-    public Sangue() {
-        this.dao = new SangueDAO(this);
-    }
-    
+    }  
     
     @Override
     public void save() {
@@ -79,6 +83,19 @@ public class Sangue implements IDAO<Object>{
     @Override
     public ArrayList<Object> get() {
         return this.dao.get();
+    }
+    
+    public void initDb() {
+        String tipos[] = {"A", "B", "AB", "O"};
+        String rh[] = {"+", "-"};
+        for (String tipo : tipos) {
+            this.setTipoSanguineo(tipo);
+            this.setFatorRh(rh[0]);
+            this.save();
+            this.setTipoSanguineo(tipo);
+            this.setFatorRh(rh[1]);
+            this.save();
+        }
     }
     
 }

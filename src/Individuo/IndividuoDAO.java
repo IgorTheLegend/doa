@@ -7,6 +7,8 @@ package Individuo;
 
 import database.DBConnection;
 import database.MySQLConnection;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import model.IDAO;
 
@@ -20,6 +22,8 @@ public class IndividuoDAO implements IDAO<Object>{
     private String baseName = "doa_project";
     private DBConnection database;
     private Individuo individuo;
+    DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
 
     public IndividuoDAO(Individuo e) {
         individuo = e;
@@ -99,13 +103,39 @@ public class IndividuoDAO implements IDAO<Object>{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public Object find(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Individuo find(String cpf) {
+        ArrayList<String> result = database.find(table, cpf);
+        try {
+            mapToInviduo(individuo, result);
+        } catch (NullPointerException ex) {
+            individuo = new Individuo();
+        }
+        return individuo;
+    }
+    
+    public void mapToInviduo(Individuo e, ArrayList<String> linha) {
+        e.setCpf(linha.get(0));
+        e.setAltura(Float.parseFloat(linha.get(1)));
+        e.setCheckUp(Boolean.parseBoolean(linha.get(0)));
+        e.setDataNascimento(LocalDate.parse(linha.get(0), formatador));
+        e.setDoadorMedula(Boolean.parseBoolean(linha.get(0)));
+        e.setNome(linha.get(0));
+        e.setObservacoes(linha.get(0));
+        e.setOrgaoExp(linha.get(0));
+        e.setPeso(Float.parseFloat(linha.get(0)));
+        e.setRg(linha.get(0));
+        e.setSangue_id(linha.get(0));
+        e.setTelefone(linha.get(0));
+        e.setUf(linha.get(0));
     }
 
     @Override
     public ArrayList<Object> get() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object find(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

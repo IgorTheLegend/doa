@@ -19,13 +19,13 @@ public class MySQLConnection implements DBConnection {
 
     private String lastQuery;
     private Connection conexao;
-    private String HOST = "127.0.0.1";
+    private String HOST = "localhost";
     private String PORT = "3306";
-    private String USER = "root";
-    private String PASS = "";
+    private String USER = "iacf";
+    private String PASS = "password";
     private String BASE = "doa_project";
     private String DRIVER = "com.mysql.jdbc.Driver";
-    private String PARAMETERS = "";//?useTimezone=true&serverTimezone=UTC&autoReconnect=true&useSSL=false";
+    private String PARAMETERS = "?useTimezone=true&serverTimezone=UTC&autoReconnect=true&useSSL=false";
     private String URL = "jdbc:mysql://" + HOST + ":" + PORT +  "/" + BASE + PARAMETERS;
 
     
@@ -158,6 +158,12 @@ public class MySQLConnection implements DBConnection {
     @Override
     public ArrayList<String> find(String table, int id) {
         String query = "SELECT * FROM `" + table + "` WHERE `id`=" + id;
+        ArrayList<ArrayList<String>> rs = query(query);
+        return rs.size() > 0 ? rs.get(0) : null;
+    }
+
+    public ArrayList<String> find(String table, String cpf) {
+        String query = "SELECT * FROM `" + table + "` WHERE `cpf`=" + cpf;
         ArrayList<ArrayList<String>> rs = query(query);
         return rs.size() > 0 ? rs.get(0) : null;
     }

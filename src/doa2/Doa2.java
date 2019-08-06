@@ -5,6 +5,7 @@
  */
 package doa2;
 
+import Individuo.Individuo;
 import Sangue.Sangue;
 
 /**
@@ -20,9 +21,14 @@ public class Doa2 {
         // TODO code application logic here
         System.out.println("executou");
         Sangue s = new Sangue();
-        s.setFatorRh("+");
-        s.setTipoSanguineo("A");
-        s.save();
+        s.setTipoSanguineo("Ab");
+        s.setFatorRh("-");
+        System.out.println(s.getId());
+        
+        Individuo i = new Individuo();
+        i = i.find("121321321231321");
+        i.setAltura(1.9);
+        i.update();
     }
     
 }

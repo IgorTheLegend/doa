@@ -31,6 +31,7 @@ public class Individuo implements IDAO<Object>{
     private String telefone;
     private String observacoes;
     private String sangue_id;
+    DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public String getSangue_id() {
         return sangue_id;
@@ -39,16 +40,6 @@ public class Individuo implements IDAO<Object>{
     public void setSangue_id(String sangue_id) {
         this.sangue_id = sangue_id;
     }
-
-    public DateTimeFormatter getFormatador() {
-        return formatador;
-    }
-
-    public void setFormatador(DateTimeFormatter formatador) {
-        this.formatador = formatador;
-    }
-
-    DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public IndividuoDAO getDao() {
         return dao;
@@ -166,7 +157,7 @@ public class Individuo implements IDAO<Object>{
 
     @Override
     public void update() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.dao.update();
     }
 
     @Override
@@ -174,14 +165,17 @@ public class Individuo implements IDAO<Object>{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public Object find(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Individuo find(String cpf) {
+        return this.dao.find(cpf);
     }
 
     @Override
     public ArrayList<Object> get() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+    @Override
+    public Object find(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }  
 }

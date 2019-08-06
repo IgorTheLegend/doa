@@ -5,6 +5,7 @@
  */
 package BolsaDeSangue;
 
+import Sangue.Sangue;
 import java.util.ArrayList;
 import model.IDAO;
 
@@ -22,7 +23,8 @@ public class BolsaDeSangue implements IDAO<Object>{
         return dao;
     }
 
-    public BolsaDeSangue() {
+    public BolsaDeSangue(int sangue_id) {
+        this.setSangue_id(sangue_id);
         this.dao = new BolsaDeSangueDAO(this);
     }
 
@@ -73,4 +75,7 @@ public class BolsaDeSangue implements IDAO<Object>{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    public void retirada(String sangue_id) {
+        this.dao.retirada(sangue_id);
+    }
 }
