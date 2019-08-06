@@ -38,8 +38,8 @@ public class IndividuoDAO implements IDAO<Object>{
             "orgaoExp",
             "dataNascimento",
             "uf",
-            "doadorMedula",
             "altura",
+            "doadorMedula",
             "peso",
             "checkUp",
             "telefone",
@@ -53,13 +53,13 @@ public class IndividuoDAO implements IDAO<Object>{
             individuo.getOrgaoExp(),
             individuo.getDataNascimento().toString(),
             individuo.getUf(),
-            individuo.getDoadorMedula().toString(),
             individuo.getAltura().toString(),
+            Integer.toString(individuo.getDoadorMedula() ? 1 : 0),
             individuo.getPeso().toString(),
-            individuo.getCheckUp().toString(),
+            Integer.toString(individuo.getCheckUp() ? 1 : 0),
             individuo.getTelefone(),
             individuo.getObservacoes(),
-            individuo.getSangue_id()
+            Integer.toString(individuo.getSangue_id())
         };
         database.insert(table, fields, values);
     }
@@ -115,16 +115,16 @@ public class IndividuoDAO implements IDAO<Object>{
     
     public void mapToInviduo(Individuo e, ArrayList<String> linha) {
         e.setCpf(linha.get(0));
-        e.setAltura(Float.parseFloat(linha.get(1)));
+        e.setAltura(Double.parseDouble(linha.get(1)));
         e.setCheckUp(Boolean.parseBoolean(linha.get(0)));
-        e.setDataNascimento(LocalDate.parse(linha.get(0), formatador));
+        e.setDataNascimento(linha.get(0));
         e.setDoadorMedula(Boolean.parseBoolean(linha.get(0)));
         e.setNome(linha.get(0));
         e.setObservacoes(linha.get(0));
         e.setOrgaoExp(linha.get(0));
-        e.setPeso(Float.parseFloat(linha.get(0)));
+        e.setPeso(Double.parseDouble(linha.get(0)));
         e.setRg(linha.get(0));
-        e.setSangue_id(linha.get(0));
+        e.setSangue_id(Integer.parseInt(linha.get(0)));
         e.setTelefone(linha.get(0));
         e.setUf(linha.get(0));
     }

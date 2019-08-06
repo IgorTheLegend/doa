@@ -25,19 +25,19 @@ public class Individuo implements IDAO<Object>{
     private LocalDate dataNascimento;
     private String uf;
     private Boolean doadorMedula;
-    private Float altura;
-    private Float peso;
+    private Double altura;
+    private Double peso;
     private Boolean checkUp;
     private String telefone;
     private String observacoes;
-    private String sangue_id;
+    private int sangue_id;
     DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    public String getSangue_id() {
+    public int getSangue_id() {
         return sangue_id;
     }
 
-    public void setSangue_id(String sangue_id) {
+    public void setSangue_id(int sangue_id) {
         this.sangue_id = sangue_id;
     }
 
@@ -85,8 +85,8 @@ public class Individuo implements IDAO<Object>{
         return dataNascimento;
     }
 
-    public void setDataNascimento(LocalDate dataNascimento) {
-        this.dataNascimento = dataNascimento;
+    public void setDataNascimento(String dataNascimento) {
+        this.dataNascimento = LocalDate.parse(dataNascimento, formatador);
     }
 
     public String getUf() {
@@ -105,19 +105,19 @@ public class Individuo implements IDAO<Object>{
         this.doadorMedula = doadorMedula;
     }
 
-    public Float getAltura() {
+    public Double getAltura() {
         return altura;
     }
 
-    public void setAltura(Float altura) {
+    public void setAltura(Double altura) {
         this.altura = altura;
     }
 
-    public Float getPeso() {
+    public Double getPeso() {
         return peso;
     }
 
-    public void setPeso(Float peso) {
+    public void setPeso(Double peso) {
         this.peso = peso;
     }
 
